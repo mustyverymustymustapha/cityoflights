@@ -38,3 +38,16 @@ button:hover {
   margin-top: 1rem;
   font-weight: bold;
 }
+
+#tourismLink {
+  margin-top: 1rem;
+}
+
+#tourismLink a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+#tourismLink a:hover {
+  text-decoration: underline;
+}
