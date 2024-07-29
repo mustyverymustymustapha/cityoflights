@@ -14,6 +14,14 @@
         <button onclick="getSuggestion()">Get Suggestion</button>
         <div id="result"></div>
         <div id="tourismLink"></div>
+        <div id="currencyConverter">
+            <h2>Currency Converter</h2>
+            <input type="number" id="amount" placeholder="Amount">
+            <select id="fromCurrency"></select>
+            <select id="toCurrency"></select>
+            <button onclick="convertCurrency()">Convert</button>
+            <div id="conversionResult"></div>
+        </div>
     </div>
     <div id="cityImages"></div>
     <script src="script.js"></script>

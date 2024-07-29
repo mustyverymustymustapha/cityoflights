@@ -203,3 +203,33 @@ function fetchCityImages() {
 }
 
 fetchCityImages();
+
+let exchangeRates = {};
+
+fetch('https://open.er-api.com/v6/latest/USD')
+    .then(response => response.json())
+    .then(data => {
+        exchangeRates = data.rates;
+        const fromCurrency = document.getElementById('fromCurrency');
+        const toCurrency = document.getElementById('toCurrency');
+        for (const currency in exchangeRates) {
+            fromCurrency.innerHTML += `<option value="${currency}">${currency}</option>`;
+            toCurrency.innerHTML += `<option value="${currency}">${currency}</option>`;
+        }
+    })
+    .catch(error => console.error('Error fetching exchange rates:', error));
+
+function convertCurrency() {
+    const amount = document.getElementById('amount').value;
+    const fromCurrency = document.getElementById('fromCurrency').value;
+    const toCurrency = document.getElementById('toCurrency').value;
+    const conversionResult = document.getElementById('conversionResult');
+
+    if (!amount || !fromCurrency || !toCurrency) {
+        conversionResult.textContent = 'Please fill in all fields.';
+        return;
+    }
+
+    const convertedAmount = (amount / exchangeRates[fromCurrency]) * exchangeRates[toCurrency];
+    conversionResult.textContent = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
+}

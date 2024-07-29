@@ -15,7 +15,7 @@ body {
   text-align: center;
 }
 
-input, button {
+input, button, select {
   font-size: 1rem;
   padding: 0.5rem;
   margin: 0.5rem 0;
@@ -33,7 +33,7 @@ button:hover {
   background-color: #45a049;
 }
 
-#result {
+#result, #conversionResult {
   margin-top: 1rem;
   font-weight: bold;
 }
@@ -64,4 +64,10 @@ button:hover {
   height: 200px;
   object-fit: cover;
   border-radius: 5px;
+}
+
+#currencyConverter {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ccc;
 }
