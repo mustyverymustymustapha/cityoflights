@@ -151,7 +151,6 @@ function getSuggestion() {
     const suggestion = cityMap[favoriteCity] || getRandomCity(favoriteCity);
     resultDiv.textContent = `Based on your favorite city (${favoriteCity}), I suggest visiting: ${suggestion}`;
 
-
     clearTimeout(tourismLinkTimer);
     tourismLinkDiv.innerHTML = "";
 
@@ -164,11 +163,12 @@ function getSuggestion() {
         const link = countryTourismSites[suggestedCountry];
         tourismLinkDiv.innerHTML = `<a href="${link}" target="_blank">Visit ${suggestedCountry}'s official tourism website</a>`;
 
-        
         tourismLinkTimer = setTimeout(() => {
             tourismLinkDiv.innerHTML = "";
         }, 30000);
     }
+
+    fetchCityImages();
 }
 
 function getRandomCity(excludeCity) {
@@ -177,8 +177,29 @@ function getRandomCity(excludeCity) {
     return availableCities[Math.floor(Math.random() * availableCities.length)];
 }
 
-
 document.getElementById("favoriteCity").addEventListener("input", function() {
     clearTimeout(tourismLinkTimer);
     document.getElementById("tourismLink").innerHTML = "";
 });
+
+function fetchCityImages() {
+    const apiKey = 'Z9-T5Kb8TRmNQJQ0i9UjT9pxPkV0JUSO0dNRER-tRDk';
+    const apiUrl = `https://api.unsplash.com/photos/random?query=city&count=6&client_id=${apiKey}`;
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const cityImagesDiv = document.getElementById('cityImages');
+            cityImagesDiv.innerHTML = '';
+            data.forEach(image => {
+                const img = document.createElement('img');
+                img.src = image.urls.regular;
+                img.alt = image.alt_description || 'City image';
+                img.className = 'city-image';
+                cityImagesDiv.appendChild(img);
+            });
+        })
+        .catch(error => console.error('Error fetching images:', error));
+}
+
+fetchCityImages();
