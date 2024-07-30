@@ -168,6 +168,7 @@ function getSuggestion() {
         }, 30000);
     }
 
+    fetchWeather(suggestion);
     fetchCityImages();
 }
 
@@ -232,4 +233,22 @@ function convertCurrency() {
 
     const convertedAmount = (amount / exchangeRates[fromCurrency]) * exchangeRates[toCurrency];
     conversionResult.textContent = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
+}
+
+function fetchWeather(city) {
+    const apiKey = '6b70b480a336fc95aa4893acf384e42c';
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const weatherInfo = document.getElementById('weatherInfo');
+            const temperature = data.main.temp;
+            const description = data.weather[0].description;
+            weatherInfo.innerHTML = `Current weather in ${city}: ${temperature}°C, ${description}`;
+        })
+        .catch(error => {
+            console.error('Error fetching weather:', error);
+            document.getElementById('weatherInfo').innerHTML = 'Unable to fetch weather information';
+        });
 }

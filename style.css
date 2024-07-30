@@ -33,7 +33,7 @@ button:hover {
   background-color: #45a049;
 }
 
-#result, #conversionResult {
+#result, #conversionResult, #weatherInfo {
   margin-top: 1rem;
   font-weight: bold;
 }
