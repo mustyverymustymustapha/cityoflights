@@ -71,3 +71,9 @@ button:hover {
   padding-top: 1rem;
   border-top: 1px solid #ccc;
 }
+
+
+#languagePhrases {
+    margin-top: 1rem;
+    font-style: italic;
+}

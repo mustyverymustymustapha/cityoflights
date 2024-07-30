@@ -136,6 +136,27 @@ const countryTourismSites = {
     "Nigeria": "https://tourism.gov.ng/"
 };
 
+
+const languagePhrases = {
+    "France": {
+        language: "French",
+        phrases: {
+            "Hello": "Bonjour",
+            "Thank you": "Merci",
+            "Goodbye": "Au revoir"
+        }
+    },
+    "Spain": {
+        language: "Spanish",
+        phrases: {
+            "Hello": "Hola",
+            "Thank you": "Gracias",
+            "Goodbye": "Adiós"
+        }
+    },
+    // ill add more in the future
+};
+
 let tourismLinkTimer;
 
 function getSuggestion() {
@@ -169,6 +190,14 @@ function getSuggestion() {
     }
 
     fetchWeather(suggestion);
+    const suggestedCountryLanguage = Object.keys(languagePhrases).find(country => 
+        suggestion.toLowerCase().includes(country.toLowerCase())
+    );
+    if (suggestedCountryLanguage) {
+        displayLanguagePhrases(suggestedCountryLanguage);
+    } else {
+        document.getElementById('languagePhrases').innerHTML = '';
+    }
     fetchCityImages();
 }
 
@@ -251,4 +280,15 @@ function fetchWeather(city) {
             console.error('Error fetching weather:', error);
             document.getElementById('weatherInfo').innerHTML = 'Unable to fetch weather information';
         });
+}
+
+function displayLanguagePhrases(country) {
+    const phraseData = languagePhrases[country];
+    const phrasesDiv = document.getElementById('languagePhrases');
+    let phrasesHTML = `<h3>Basic ${phraseData.language} Phrases:</h3><ul>`;
+    for (const [english, translated] of Object.entries(phraseData.phrases)) {
+        phrasesHTML += `<li>${english}: <strong>${translated}</strong></li>`;
+    }
+    phrasesHTML += '</ul>';
+    phrasesDiv.innerHTML = phrasesHTML;
 }
