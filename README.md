@@ -1,0 +1,1 @@
+you can use this project to decide your next vacation spot! just enter your favourite city, and get a similar recommendation. made by me.![DD2CB540-12E0-4C33-9114-BBB4EA697FFA](https://github.com/user-attachments/assets/deb067d5-3949-4d5b-82b8-76d727c1878c)
